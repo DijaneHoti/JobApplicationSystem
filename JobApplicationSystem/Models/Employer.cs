@@ -24,10 +24,10 @@ namespace JobApplicationSystem.Models
         [Required]
         public string Address { get; set; }
 
-        public int JobseekerID { get; set; }
-        [ForeignKey("JobseekerID")]
+        public int CompanyID { get; set; }
+        [ForeignKey("CompanyID")]
 
-        public Jobseeker Jobseeker { get; set; }
+        public Company Company { get; set; }
 
     }
 }

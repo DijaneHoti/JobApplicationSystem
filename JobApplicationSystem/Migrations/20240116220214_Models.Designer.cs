@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobApplicationSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240116153825_add-migration Models")]
-    partial class addmigrationModels
+    [Migration("20240116220214_Models")]
+    partial class Models
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,9 @@ namespace JobApplicationSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -87,9 +90,6 @@ namespace JobApplicationSystem.Migrations
                     b.Property<string>("Field")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("JobseekerID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -104,7 +104,7 @@ namespace JobApplicationSystem.Migrations
 
                     b.HasKey("EmployerID");
 
-                    b.HasIndex("JobseekerID");
+                    b.HasIndex("CompanyID");
 
                     b.ToTable("Employers");
                 });
@@ -204,13 +204,13 @@ namespace JobApplicationSystem.Migrations
 
             modelBuilder.Entity("JobApplicationSystem.Models.Employer", b =>
                 {
-                    b.HasOne("JobApplicationSystem.Models.Jobseeker", "Jobseeker")
+                    b.HasOne("JobApplicationSystem.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("JobseekerID")
+                        .HasForeignKey("CompanyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Jobseeker");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("JobApplicationSystem.Models.HiringManager", b =>

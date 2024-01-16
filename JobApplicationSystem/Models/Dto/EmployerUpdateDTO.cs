@@ -24,6 +24,6 @@ namespace JobApplicationSystem.Models.Dto
         public string Address { get; set; }
 
         [Required]
-        public int JobseekerID { get; set; }
+        public int CompanyID { get; set; }
     }
 }
