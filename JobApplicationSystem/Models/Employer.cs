@@ -1,0 +1,33 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace JobApplicationSystem.Models
+{
+    public class Employer
+    {
+        [Key]
+        public int EmployerID { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Field { get; set; }
+        
+        [Required]
+        public int Phone { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+       
+        [Required]
+        public string Address { get; set; }
+
+        public int JobseekerID { get; set; }
+        [ForeignKey("JobseekerID")]
+
+        public Jobseeker Jobseeker { get; set; }
+
+    }
+}
