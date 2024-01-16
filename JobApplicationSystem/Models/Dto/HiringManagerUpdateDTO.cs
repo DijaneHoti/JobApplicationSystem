@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobApplicationSystem.Models
+namespace JobApplicationSystem.Models.Dto
 {
-    public class HiringManager
+    public class HiringManagerUpdateDTO
     {
-        [Key]
-        public int ManagerID { get; set; }
-        //[Required]
+        [Required]
         public string Name { get; set; }
-        //[Required]
+        [Required]
         public string Specializimi { get; set; }
-        //[Required]
+        [Required]
         public string Email { get; set; }
     }
 }
