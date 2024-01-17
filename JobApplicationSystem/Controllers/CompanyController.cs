@@ -70,8 +70,8 @@ namespace JobApplicationSystem.Controllers
             var company = new Company
             {
                 CompanyName = companyCreateDTO.CompanyName,
-                hiringManager = companyCreateDTO.hiringManager
-                //qito hiringManager spo di a osht mire se osht si list atje te atributet e klases Company
+               // hiringManager = companyCreateDTO.hiringManager
+                
             };
 
             _db.Companies.Add(company);

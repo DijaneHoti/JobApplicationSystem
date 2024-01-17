@@ -11,5 +11,7 @@ namespace JobApplicationSystem.Models.Dto
         public string Specialization { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public int CompanyID { get; set; }
     }
 }

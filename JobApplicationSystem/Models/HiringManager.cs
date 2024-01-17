@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobApplicationSystem.Models
 {
@@ -12,5 +13,11 @@ namespace JobApplicationSystem.Models
         public string Specialization { get; set; }
         [Required]
         public string Email { get; set; }
+
+       
+        public int CompanyID { get; set; }
+        [ForeignKey("CompanyID")]
+        public Company Company { get; set; }
+
     }
 }

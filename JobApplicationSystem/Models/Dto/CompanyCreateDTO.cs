@@ -8,7 +8,7 @@ namespace JobApplicationSystem.Models.Dto
         [Required]
         public string CompanyName { get; set; }
 
-        [Required]
-        public List<HiringManager> hiringManager { get; set; }
+        //[Required]
+        //public List<HiringManager> hiringManager { get; set; }
     }
 }
