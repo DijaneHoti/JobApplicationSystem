@@ -4,8 +4,7 @@ namespace JobApplicationSystem.Models.Dto
 {
     public class CompanyCreateDTO
     {
-        [Required]
-        public int CompanyID { get; set; }
+      
         [Required]
         public string CompanyName { get; set; }
 

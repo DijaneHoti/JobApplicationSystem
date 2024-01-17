@@ -5,6 +5,9 @@ namespace JobApplicationSystem.Models.Dto
     public class JobUpdateDTO
     {
         [Required]
+        public int JobID { get; set; }
+
+        [Required]
         public string PositionName { get; set; }
 
         [Required]

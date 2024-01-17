@@ -20,5 +20,9 @@ namespace JobApplicationSystem.Models.Dto
         [Required]
         public string Address { get; set; }
 
+        [Required]
+        public int CompanyID { get; set; }
+
+        
     }
 }

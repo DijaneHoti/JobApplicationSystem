@@ -4,6 +4,10 @@ namespace JobApplicationSystem.Models.Dto
 {
     public class CompanyUpdateDTO
     {
+
+        [Required]
+        public int CompanyID { get; set; }
+
         [Required]
         public string CompanyName { get; set; }
 
