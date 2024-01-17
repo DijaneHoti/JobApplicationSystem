@@ -9,7 +9,7 @@ namespace JobApplicationSystem.Models.Dto
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Specializimi { get; set; }
+        public string Specialization { get; set; }
         [Required]
         public string Email { get; set; }
     }
