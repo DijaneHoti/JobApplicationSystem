@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobApplicationSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240116220214_Models")]
+    [Migration("20240117152208_Models")]
     partial class Models
     {
         /// <inheritdoc />
@@ -128,7 +128,7 @@ namespace JobApplicationSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specializimi")
+                    b.Property<string>("Specialization")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
