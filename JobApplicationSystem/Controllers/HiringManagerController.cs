@@ -149,36 +149,61 @@ namespace JobApplicationSystem.Controllers
         //UPDATE
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateHiringManager(int id, [FromForm] HiringManagerUpdateDTO hiringManagerUpdateDTO)
+        public async Task<ActionResult<ApiResponse>> UpdateHiringManager(int id, [FromForm] HiringManagerUpdateDTO hiringManagerUpdateDTO)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                _response.StatusCode = HttpStatusCode.BadRequest;
-                _response.IsSuccess = false;
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages = ModelState.Values
+                        .SelectMany(x => x.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToList();
+                    return BadRequest(_response);
+                }
+
+                HiringManager hiringManager = _db.HiringManagers.FirstOrDefault(u => u.ManagerID == id);
+
+                if (hiringManager == null)
+                {
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    _response.IsSuccess = false;
+                    return NotFound(_response);
+                }
+
+
+                var hiringManagerExists = _db.HiringManagers.Any(a => a.ManagerID == hiringManagerUpdateDTO.ManagerID);
+                if (!hiringManagerExists)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages = new List<string> { "ManagerID nuk ekziston." };
+                    return BadRequest(_response);
+                }
+
+                hiringManager.Name = hiringManagerUpdateDTO.Name;
+                hiringManager.Specialization = hiringManagerUpdateDTO.Specialization;
+                hiringManager.Email = hiringManagerUpdateDTO.Email;
+                hiringManager.CompanyID = hiringManagerUpdateDTO.CompanyID;
+
+                _db.SaveChanges();
+                _response.StatusCode = HttpStatusCode.OK;
+                _response.IsSuccess = true;
+                return Ok(_response);
             }
-
-            HiringManager hiringManager = await _db.HiringManagers.FindAsync(id);
-
-            if (hiringManager == null)
+            catch (Exception ex)
             {
-                _response.StatusCode = HttpStatusCode.NotFound;
                 _response.IsSuccess = false;
-                return NotFound(_response);
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+                // Log the exception for debugging
+                Console.WriteLine(ex.ToString());
             }
-
-            hiringManager.Name = hiringManagerUpdateDTO.Name;
-            hiringManager.Specialization = hiringManagerUpdateDTO.Specialization;
-            hiringManager.Email = hiringManagerUpdateDTO.Email;
-
-          
-
-            await _db.SaveChangesAsync();
-
-            _response.Result = hiringManager;
-            _response.StatusCode = HttpStatusCode.OK;
-            return Ok(_response);
+            return _response;
         }
+
+
 
 
         //DELETE
