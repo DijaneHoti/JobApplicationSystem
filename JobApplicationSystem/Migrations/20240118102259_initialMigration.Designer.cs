@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobApplicationSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240117220454_Modelss")]
-    partial class Modelss
+    [Migration("20240118102259_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
