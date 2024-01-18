@@ -105,7 +105,7 @@ namespace JobApplicationSystem.Controllers
             }
 
             company.CompanyName = companyUpdateDTO.CompanyName;
-            company.hiringManager = companyUpdateDTO.hiringManager;
+            //company.hiringManager = companyUpdateDTO.hiringManager;
             //qito hiringManager spo di a osht mire se osht si list atje te atributet e klases Company
 
             await _db.SaveChangesAsync();
