@@ -240,5 +240,36 @@ namespace JobApplicationSystem.Controllers
 
 
 
+
+
+
+
+        [HttpGet("GetHiringManagersBySpecialization")]
+        public IActionResult GetHiringManagersBySpecialization([FromQuery] string specialization)
+        {
+            if (string.IsNullOrEmpty(specialization))
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                return BadRequest(_response);
+            }
+
+            var hiringManagers = _db.HiringManagers
+                .Where(h => h.Specialization == specialization)
+                .ToList();
+
+            if (hiringManagers.Count == 0)
+            {
+                _response.StatusCode = HttpStatusCode.NotFound;
+                _response.IsSuccess = false;
+                return NotFound(_response);
+            }
+
+            _response.Result = hiringManagers;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
+
+
     }
 }

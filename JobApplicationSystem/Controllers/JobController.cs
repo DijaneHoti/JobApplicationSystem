@@ -200,5 +200,43 @@ namespace JobApplicationSystem.Controllers
 
 
         }
+
+
+        //[HttpGet("GetJobByPositionName")]
+        //public IActionResult GetJobByPositionName([FromQuery] string positionName)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(positionName))
+        //        {
+        //            _response.StatusCode = HttpStatusCode.BadRequest;
+        //            _response.IsSuccess = false;
+        //            return BadRequest(_response);
+        //        }
+
+        //        var jobs = _db.Jobs
+        //            .Where(j => j.PositionName == positionName)
+        //            .ToList();
+
+        //        if (jobs.Count == 0)
+        //        {
+        //            _response.StatusCode = HttpStatusCode.NotFound;
+        //            _response.IsSuccess = false;
+        //            return NotFound(_response);
+        //        }
+
+        //        _response.Result = jobs;
+        //        _response.StatusCode = HttpStatusCode.OK;
+        //        return Ok(_response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess = false;
+        //        _response.ErrorMessages = new List<string> { ex.ToString() };
+        //        // Log the exception for debugging
+        //        Console.WriteLine(ex.ToString());
+        //        return Ok(_response);
+        //    }
+        //}
     }
 }

@@ -164,7 +164,7 @@ namespace JobApplicationSystem.Controllers
 
 
 
-        // te delete po ma qet 204 edhe 200 response nSwagger amo kshtu pe fshin mire
+        
 
         [HttpDelete("{id:int}")]
 
@@ -199,5 +199,46 @@ namespace JobApplicationSystem.Controllers
 
 
         }
+
+
+
+        [HttpPost("SubmitJobPosting")]
+        [RequireHttps]
+        public async Task<ActionResult<ApiResponse>> SubmitJobPosting([FromForm] JobPostingCreateDTO jobPostingCreateDTO)
+        {
+            try
+            {
+                // Check if all fields are filled
+                if (string.IsNullOrEmpty(jobPostingCreateDTO.JobPostingTitle) ||
+                    string.IsNullOrEmpty(jobPostingCreateDTO.JobPostingDescription))
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string> { "All fields must be filled." };
+                    return BadRequest(_response);
+                }
+
+                // Set the response properties
+                _response.Result = "Job posting submitted successfully!";
+                _response.StatusCode = HttpStatusCode.OK;
+
+                // Return the response
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+                Console.WriteLine(ex.ToString());
+            }
+
+            // Return the response in case of an error
+            return _response;
+        }
+
+
+
+
     }
 }

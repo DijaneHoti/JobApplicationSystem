@@ -208,5 +208,44 @@ namespace JobApplicationSystem.Controllers
 
 
         }
+
+
+        [HttpGet("GetEmployersByField")]
+        public IActionResult GetEmployersByField([FromQuery] string field)
+        {
+            if (string.IsNullOrEmpty(field))
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                return BadRequest(_response);
+            }
+
+            var employers = _db.Employers
+                .Where(e => e.Field == field)
+                .Select(e => new GetEmployerByFieldDTO
+                {
+                    EmployerID = e.EmployerID,
+                    Name = e.Name,
+                    Email = e.Email
+                    // Include other properties you want to expose in the DTO
+                })
+                .ToList();
+
+            if (employers.Count == 0)
+            {
+                _response.StatusCode = HttpStatusCode.NotFound;
+                _response.IsSuccess = false;
+                return NotFound(_response);
+            }
+
+            _response.Result = employers;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
+
+
+
+
+
     }
 }
