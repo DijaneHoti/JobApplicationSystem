@@ -35,6 +35,7 @@ namespace JobApplicationSystem.Repository
             return entity;
         }
 
+        //GetBySpecialization
         public async Task<ActionResult<IEnumerable<T>>> GetBySpecialization(string specialization)
         {
             var entities = await dbSet.Where(e => EF.Property<string>(e, "Specialization") == specialization)
@@ -47,6 +48,23 @@ namespace JobApplicationSystem.Repository
 
             return Ok(entities);
         }
+
+        ////GetByField
+
+        //public async Task<ActionResult<IEnumerable<T>>> GetByField(string field)
+        //{
+        //    var entities = await dbSet.Where(e => EF.Property<string>(e, "Field") == field)
+        //        .Include(e => EF.Property<string>(e, "Company"))
+        //        .ToListAsync();
+        //    if (!entities.Any())
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(entities);
+        //}
+
+
 
         //Update Request
         public async Task<IActionResult> Update(int id, T entity)

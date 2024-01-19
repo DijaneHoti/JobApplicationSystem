@@ -11,7 +11,7 @@ namespace JobApplicationSystem.Models.Dto
         public string Field { get; set; }
 
         [Required]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

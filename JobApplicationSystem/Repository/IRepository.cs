@@ -10,6 +10,7 @@ namespace JobApplicationSystem.Repository
         public Task<ActionResult<T>> Create(T entity);
         public Task<IActionResult> Update(int id, T entity);
         public Task<ActionResult<IEnumerable<T>>> GetBySpecialization(string specialization);
+        //public Task<ActionResult<IEnumerable<T>>> GetByField(string field);
         public Task<IActionResult> Delete(int id);
     }
 }

@@ -4,8 +4,8 @@ namespace JobApplicationSystem.Models.Dto
 {
     public class EmployerUpdateDTO
     {
-        [Required]
-        public int EmployerID { get; set; }
+       // [Required]
+        //public int EmployerID { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace JobApplicationSystem.Models.Dto
         public string Field { get; set; }
 
         [Required]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

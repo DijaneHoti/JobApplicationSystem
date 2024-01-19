@@ -28,6 +28,30 @@ namespace JobApplicationSystem.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<HiringManager>>> GetHiringManagers()
+        {
+            var actionResult = await hiringManagerRepository.Get();
+            List<HiringManager> hiringManagers = new List<HiringManager>();
+            if (actionResult.Result is OkObjectResult okResult)
+            {
+                hiringManagers = okResult.Value as List<HiringManager>;
+                // Now you can work with your companies list.
+            }
+            var hiringManagerDto = hiringManagers.Select(c => new GetHiringManagerDTO
+            {
+                ManagerID = c.ManagerID,
+                Name = c.Name,
+                Specialization = c.Specialization,
+                Email = c.Email
+            });
+
+            return Ok(hiringManagerDto);
+        }
+
+
+
+
         [HttpPost]
         public async Task<ActionResult<HiringManager>> CreateHiringManger(HiringManagerCreateDTO hiringManagerDto)
         {
@@ -63,6 +87,16 @@ namespace JobApplicationSystem.Controllers
             var hiringManagers = await hiringManagerRepository.Update(id, hiringManager);
             return hiringManagers;
         }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHiringManager(int id)
+        {
+            var hiringManagers = await hiringManagerRepository.Delete(id);
+            return hiringManagers;
+        }
+
 
         [HttpGet("GetHiringManagersBySpecialization")]
         public async Task<ActionResult<IEnumerable<HiringManager>>> GetHiringManagersBySpecialization([FromQuery] string specialization)
