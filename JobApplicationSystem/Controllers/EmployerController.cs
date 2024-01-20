@@ -5,6 +5,7 @@ using JobApplicationSystem.Repository;
 using JobApplicationSystem.UnitofWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -118,6 +119,53 @@ namespace JobApplicationSystem.Controllers
 
 
 
+
+        //-----------------------------------------------------ERROR 500
+
+        //[HttpGet("GetEmployersByField")]
+        //public IActionResult GetEmployersByField([FromQuery] string field)
+        //{
+        //    if (string.IsNullOrEmpty(field))
+        //    {
+        //        _response.StatusCode = HttpStatusCode.BadRequest;
+        //        _response.IsSuccess = false;
+        //        return BadRequest(_response);
+        //    }
+
+        //    var employers = _context.Employers
+        //        .Where(e => e.Field == field)
+        //        .Select(e => new GetEmployerByFieldDTO
+        //        {
+        //            EmployerID = e.EmployerID,
+        //            Name = e.Name,
+        //            Email = e.Email
+        //            // Include other properties you want to expose in the DTO
+        //        })
+        //        .ToList();
+
+        //    if (employers.Count == 0)
+        //    {
+        //        _response.StatusCode = HttpStatusCode.NotFound;
+        //        _response.IsSuccess = false;
+        //        return NotFound(_response);
+        //    }
+
+        //    _response.Result = employers;
+        //    _response.StatusCode = HttpStatusCode.OK;
+        //    return Ok(_response);
+        //}
+
+
+
+
+
+
+
+
+
+
+        //--------------------------------------------- me patterna
+
         //[HttpGet("GetEmployersByField")]
         //public async Task<ActionResult<IEnumerable<Employer>>> GetEmployersByField([FromQuery] string field)
         //{
@@ -155,44 +203,7 @@ namespace JobApplicationSystem.Controllers
 
 
 
-        //[HttpGet("GetEmployersByField")]
-        //public IActionResult GetEmployersByField([FromQuery] string field)
-        //{
-        //    if (string.IsNullOrEmpty(field))
-        //    {
-        //        _response.StatusCode = HttpStatusCode.BadRequest;
-        //        _response.IsSuccess = false;
-        //        return BadRequest(_response);
-        //    }
-
-        //    var employers = _db.Employers
-        //        .Where(e => e.Field == field)
-        //        .Select(e => new GetEmployerByFieldDTO
-        //        {
-        //            EmployerID = e.EmployerID,
-        //            Name = e.Name,
-        //            Email = e.Email
-        //            // Include other properties you want to expose in the DTO
-        //        })
-        //        .ToList();
-
-        //    if (employers.Count == 0)
-        //    {
-        //        _response.StatusCode = HttpStatusCode.NotFound;
-        //        _response.IsSuccess = false;
-        //        return NotFound(_response);
-        //    }
-
-        //    _response.Result = employers;
-        //    _response.StatusCode = HttpStatusCode.OK;
-        //    return Ok(_response);
-        //}
-
-
-
-
-
-
+        //---------------------------------------------------------------------
 
 
 

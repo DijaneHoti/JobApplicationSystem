@@ -77,6 +77,12 @@ namespace JobApplicationSystem.Controllers
             var companies = await companyRepository.Delete(id);
             return companies;
         }
+
+
+
+
+
+
         //[HttpGet("{id:int}")]
         //public async Task<IActionResult> GetCompany(int? id)
         //{
