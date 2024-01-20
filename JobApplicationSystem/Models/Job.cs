@@ -21,6 +21,6 @@ namespace JobApplicationSystem.Models.Dto
         [ForeignKey("CompanyID")]
 
         public Company Company { get; set; }
-
+        public List<JobPosting> JobPosts { get; set; }
     }
 }

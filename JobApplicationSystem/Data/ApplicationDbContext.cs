@@ -15,6 +15,7 @@ namespace JobApplicationSystem.Data
         public DbSet<Job>Jobs { get; set; }
 
         public DbSet<Jobseeker>Jobseekers { get; set; }
+        public DbSet<JobPostSeekers> JobPostSeekers { get; set; }
 
         public DbSet<JobPosting>JobPostings { get; set; }
 

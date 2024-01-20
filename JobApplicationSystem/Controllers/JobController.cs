@@ -5,6 +5,7 @@ using JobApplicationSystem.Repository;
 using JobApplicationSystem.UnitofWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -41,7 +42,7 @@ namespace JobApplicationSystem.Controllers
                 JobID = c.JobID,
                 PositionName = c.PositionName,
                 Description = c.Description,
-              
+
             });
 
             return Ok(jobDto);
@@ -71,6 +72,44 @@ namespace JobApplicationSystem.Controllers
         }
 
 
+        [HttpPost("Konkuro")]
+        public async Task<IActionResult> Konkuro(JobPostSeekerDTO model)
+        {
+            JobPostSeekers jobPostSeeker = new JobPostSeekers()
+            {
+                JobPostingID = model.JobPostingID,
+                JobSeekerID = model.JobSeekerID,
+            };
+            await _context.JobPostSeekers.AddAsync(jobPostSeeker);
+            await _context.SaveChangesAsync();
+            return Ok(jobPostSeeker);
+        }
+
+        [HttpGet("GetSeekersData")]
+        public async Task<IActionResult> GetSeekersData(){
+               
+            //qekjo i merr prej databaze komplet tabelen jobpostseekers
+            //i bona include job posting edhe jobseeker se mu dasht me iteru neper qato tabela per
+            //me jau marr emrin edhe kolonat tjera qa mu dashten
+            var seekers =  await _context.JobPostSeekers
+                .Include(x=>x.JobPosting)
+                .Include(x=>x.Jobseeker)
+                .ToListAsync();
+
+            //e kom kriju ni liste te zbrazet te qesej dto qe e kom shkru qa na interesojn mu pa ne front
+            List<GetJobPostSeekersDTO> seekerslist = new List<GetJobPostSeekersDTO>();
+
+            //tash qet listen e zbrazet (DTO) e mbushi me te dhena nga lista gjenerale e jobseekers edhe marr vec
+            //cka du
+            seekerslist = seekers.Select(seekers => new GetJobPostSeekersDTO()
+            {
+                Seeker = seekers.Jobseeker.JobseekerName,
+                PostTitle = seekers.JobPosting.JobPostingTitle,
+                PostDescription = seekers.JobPosting.JobPostingDescription
+            }).ToList();
+            
+            return Ok(seekerslist);
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateJob(int id, JobUpdateDTO jobDto)

@@ -29,7 +29,7 @@ namespace JobseekerApplicationSystem.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<ActionResult<IEnumerable<Jobseeker>>> Get()
         {
             var actionResult = await jobseekerRepository.Get();
@@ -41,7 +41,7 @@ namespace JobseekerApplicationSystem.Controllers
             }
             var jobseekerDto = jobseekers.Select(c => new GetJobseekerDTO
             {
-                JobseekerID = c.JobPostingID,
+                JobseekerID = c.JobseekerID,
                 JobseekerName = c.JobseekerName,
                 JobseekerEmail = c.JobseekerEmail,
 
@@ -66,7 +66,7 @@ namespace JobseekerApplicationSystem.Controllers
             {
                 JobseekerName = jobseekerDto.JobseekerName,
                 JobseekerEmail = jobseekerDto.JobseekerEmail,
-                JobPostingID = jobseekerDto.JobPostingID,
+                //JobPostingID = jobseekerDto.JobPostingID,
 
             };
             var jobseekers = await jobseekerRepository.Create(jobseeker);
@@ -88,7 +88,7 @@ namespace JobseekerApplicationSystem.Controllers
                 JobseekerID = id,
                 JobseekerName = jobseekerDto.JobseekerName,
                 JobseekerEmail = jobseekerDto.JobseekerEmail,
-                JobPostingID = jobseekerDto.JobPostingID
+                //JobPostingID = jobseekerDto.JobPostingID
 
             };
             var jobseekers = await jobseekerRepository.Update(id, jobseeker);

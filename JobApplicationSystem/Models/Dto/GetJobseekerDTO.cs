@@ -7,6 +7,5 @@
 
         public string JobseekerEmail { get; set; }
 
-        public string JobPosting { get; set; }
     }
 }

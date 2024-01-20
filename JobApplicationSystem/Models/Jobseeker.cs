@@ -13,11 +13,12 @@ namespace JobApplicationSystem.Models
         [Required]
         public string JobseekerEmail { get; set; }
 
-        
+        public List<JobPostSeekers> JobPostSeekers { get; set; }
 
-        public int JobPostingID { get; set; }
-        [ForeignKey("JobPostingID")]
 
-        public JobPosting JobPosting { get; set; }  
+        //public int JobPostingID { get; set; }
+        //[ForeignKey("JobPostingID")]
+
+        //public JobPosting JobPosting { get; set; }  
     }
 }

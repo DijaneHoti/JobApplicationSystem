@@ -23,5 +23,7 @@ namespace JobApplicationSystem.Models
 
         public  Job Job { get; set; }
 
+        public List<JobPostSeekers> JobPostSeekers { get; set; }
+
     }
 }
