@@ -24,6 +24,7 @@ namespace JobApplicationSystem.Models
         [Required]
         public string Address { get; set; }
 
+        public DateTime InsertedDate { get; set; }
         public int CompanyID { get; set; }
         [ForeignKey("CompanyID")]
 

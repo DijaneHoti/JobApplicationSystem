@@ -64,11 +64,20 @@ namespace JobApplicationSystem.Controllers
         [HttpPost]
         public async Task<ActionResult<Employer>> CreateEmployer(EmployerCreateDTO employerDto)
         {
-            
 
-            //ti parameter ja qon kompanindto qe e ka veq ni emer
-            //ama ktu te metoda duhet me i shku objekt Company
-            //tash na e krijojm ni objekt t that Company edhe e mbushim me te dhena te viewmodelit
+
+            
+            // 1. pre condition && invariant e validon a jon ne rregull inputat qysh i kem cek
+            //qe duhen mu kon ne dto
+            employerDto.Validate();
+
+            var employees = await _context.Employers.ToListAsync();
+            
+            //2. permban invariance
+            if (employees.Any(x=>x.Email == employerDto.Email))
+            {
+                return BadRequest("Employee with this email" + employerDto.Email +" exists!!");
+            }
 
             Employer employer = new Employer()
             {
@@ -79,9 +88,14 @@ namespace JobApplicationSystem.Controllers
                 Password = employerDto.Password,
                 Address = employerDto.Address,
                 CompanyID = employerDto.CompanyID,
+                InsertedDate = employerDto.InsertedDate,
 
             };
+
+
             var employers = await employerRepository.Create(employer);
+            
+            //3. post condition e kthen Ok me json nese o successful
             return Ok(employers);
         }
        

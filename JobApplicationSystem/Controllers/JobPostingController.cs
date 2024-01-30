@@ -54,9 +54,6 @@ namespace JobApplicationSystem.Controllers
         {
 
 
-            //ti parameter ja qon kompanindto qe e ka veq ni emer
-            //ama ktu te metoda duhet me i shku objekt Company
-            //tash na e krijojm ni objekt t that Company edhe e mbushim me te dhena te viewmodelit
 
             JobPosting jobPosting = new JobPosting()
             {

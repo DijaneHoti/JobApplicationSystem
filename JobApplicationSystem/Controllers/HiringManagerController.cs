@@ -55,9 +55,9 @@ namespace JobApplicationSystem.Controllers
         [HttpPost]
         public async Task<ActionResult<HiringManager>> CreateHiringManger(HiringManagerCreateDTO hiringManagerDto)
         {
-            //ti parameter ja qon kompanindto qe e ka veq ni emer
-            //ama ktu te metoda duhet me i shku objekt Company
-            //tash na e krijojm ni objekt t that Company edhe e mbushim me te dhena te viewmodelit
+            
+
+            hiringManagerDto.Validate();
 
             HiringManager hiringManager = new HiringManager()
             {

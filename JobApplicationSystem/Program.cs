@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfwork, UnitOfWork>();
-
+//builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
