@@ -69,11 +69,7 @@ namespace JobApplicationSystem.Repository
         //Update Request
         public async Task<IActionResult> Update(int id, T entity)
         {
-            if (entity is IEntity castedEntity && castedEntity.Id != id)
-            {
-                return BadRequest();
-            }
-
+            
             var existingOrder = await dbSet.FindAsync(id);
             if (existingOrder == null)
             {

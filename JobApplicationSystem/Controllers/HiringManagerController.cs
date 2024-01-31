@@ -1,10 +1,12 @@
 ﻿using Azure;
 using JobApplicationSystem.Data;
+using JobApplicationSystem.Data.Services;
 using JobApplicationSystem.Models;
 using JobApplicationSystem.Models.Dto;
 using JobApplicationSystem.Repository;
 using JobApplicationSystem.UnitofWork;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.Design;
@@ -16,16 +18,18 @@ namespace JobApplicationSystem.Controllers
     [ApiController]
     public class HiringManagerController : ControllerBase
     {
+        private readonly IHiringManagerService _managerService;
         private ApiResponse _response;
         private readonly IUnitOfwork _unitOfWork;
         IRepository<HiringManager> hiringManagerRepository;
         private readonly ApplicationDbContext _context;
 
-        public HiringManagerController(IUnitOfwork unitOfWork, ApplicationDbContext context)
+        public HiringManagerController(IUnitOfwork unitOfWork, ApplicationDbContext context, IHiringManagerService managerService)
         {
             _unitOfWork = unitOfWork;
             hiringManagerRepository = new HiringManagerRepository(_unitOfWork);
             _context = context;
+            _managerService = managerService;
         }
 
         [HttpGet]
@@ -128,6 +132,18 @@ namespace JobApplicationSystem.Controllers
             });
 
             return Ok(managerDto);
+        }
+
+        [HttpGet("GetHiringManagersByCompanyId")]
+        public async Task<IActionResult> GetHiringManagersByCompanyId([FromQuery] int companyId)
+        {
+            if(companyId <= 0)
+            {
+                return BadRequest("CompanyID is required!");
+            }
+
+            return Ok(await _managerService.GetManagersByCompanyId(companyId));
+            
         }
 
         //private readonly ApplicationDbContext _db;

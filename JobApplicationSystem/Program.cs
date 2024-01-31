@@ -1,4 +1,5 @@
 using JobApplicationSystem.Data;
+using JobApplicationSystem.Data.Services;
 using JobApplicationSystem.UnitofWork;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfwork, UnitOfWork>();
+builder.Services.AddScoped<IHiringManagerService, HiringManagerService>();
 //builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 var app = builder.Build();
 
