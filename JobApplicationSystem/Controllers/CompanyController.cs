@@ -47,9 +47,7 @@ namespace JobApplicationSystem.Controllers
         [HttpPost]
         public async Task<ActionResult<Company>> CreateCompany(CompanyCreateDTO companyDto)
         {
-            //parameter ja dergojm kompanindto qe e ka veq ni emer
-            //ama ktu te metoda duhet me i shku objekt Company
-            //tash e krijojm ni objekt te that Company edhe e mbushim me te dhena te viewmodelit
+       
 
             Company company = new Company(){
                 CompanyName = companyDto.CompanyName
