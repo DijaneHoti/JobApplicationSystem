@@ -97,35 +97,48 @@ namespace JobApplicationSystem.Controllers
 
 
         //------------------------------------------------ Edited
+        [HttpPost("SubmitJobPosting")]
 
-       
+        [RequireHttps]
+        public async Task<ActionResult<ApiResponse>> SubmitJobPosting([FromForm] JobPostingCreateDTO jobPostingCreateDTO)
+        {
+            try
+            {
+                // Check if all fields are filled
+                if (string.IsNullOrEmpty(jobPostingCreateDTO.JobPostingTitle) ||
+                    string.IsNullOrEmpty(jobPostingCreateDTO.JobPostingDescription))
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string> { "All fields must be filled." };
+                    return BadRequest(_response);
+                }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                // If there's an object that may be null, check and handle it
+                if (_response == null)
+                {
+                    _response = new ApiResponse();
+                }
 
 
+                _response.Result = "Job posting submitted successfully!";
+                _response.StatusCode = HttpStatusCode.OK;
 
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"An error occurred: {ex}");
 
+                // Handle exceptions
+                _response = new ApiResponse();
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { "An error occurred while processing the request." };
 
+                return BadRequest(_response);
+            }
+        }
 
 
 
